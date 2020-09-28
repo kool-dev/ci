@@ -1,0 +1,109 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-light bg-light box-shadow">
+            <div class="container d-flex justify-content-between">
+                <a href="/" class="navbar-brand d-flex align-items-center">
+                    <img src="/kool-logo.png" width="200">&nbsp;&nbsp;<strong>CI/CD</strong>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Laravel continuous integration on Gitlab CI</h1>
+                <p class="lead text-muted">A few usual build and quality assurante routines, with static analysis and validation for the PHP code and Laravel best practices.</p>
+                <p>
+                    <a href="https://kool.dev" target="_blank" class="btn btn-primary btn-sm my-2">Powered by Kool</a>
+                </p>
+                <p>
+                    <a href="assets.yml" class="btn btn-secondary btn-sm my-2">assets.yml</a>
+                    <a href="cs-fixer.yml" class="btn btn-secondary btn-sm my-2">cs-fixer.yml</a>
+                    <a href="dusk.yml" class="btn btn-secondary btn-sm my-2">dusk.yml</a>
+                    <a href="eslint.yml" class="btn btn-secondary btn-sm my-2">eslint.yml</a>
+                    <a href="phan.yml" class="btn btn-secondary btn-sm my-2">phan.yml</a>
+                    <a href="phpcpd.yml" class="btn btn-secondary btn-sm my-2">phpcpd.yml</a>
+                    <a href="phpmd.yml" class="btn btn-secondary btn-sm my-2">phpmd.yml</a>
+                    <a href="phpmnd.yml" class="btn btn-secondary btn-sm my-2">phpmnd.yml</a>
+                    <a href="phpunit.yml" class="btn btn-secondary btn-sm my-2">phpunit.yml</a>
+                    <a href="security-check.yml" class="btn btn-secondary btn-sm my-2">security-check.yml</a>
+                    <a href="vendor.yml" class="btn btn-secondary btn-sm my-2">vendor.yml</a>
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <section>
+        <div class="container" style="margin-bottom: 5em;">
+            <h3>Gitlab CI configuration for a Laravel application running with Kool.dev</h3>
+
+            <p>The example below can be used to run Gitlab CI jobs for your Laravel application.</p>
+            <p><b>Requirements:</b> all jobs have a <i>dind</i> tag which is meant to indicate a pre-configured Gitlab Runner on your repository that can Docker-in-Docker jobs.</p>
+
+            <p><b>.gitlab-ci.yml</b></p>
+
+            <div style="margin: 1em 5em; padding: 1em;" class="bg-dark">
+                <pre class="text-light">
+include:
+  - https://ci.kool.dev/laravel/gitlab/vendor.yml
+  - https://ci.kool.dev/laravel/gitlab/assets.yml
+  - https://ci.kool.dev/laravel/gitlab/eslint.yml
+  - https://ci.kool.dev/laravel/gitlab/security-check.yml
+  - https://ci.kool.dev/laravel/gitlab/cs-fixer.yml
+  - https://ci.kool.dev/laravel/gitlab/phpmnd.yml
+  - https://ci.kool.dev/laravel/gitlab/phpmd.yml
+  - https://ci.kool.dev/laravel/gitlab/phpcpd.yml
+  - https://ci.kool.dev/laravel/gitlab/phan.yml
+  - https://ci.kool.dev/laravel/gitlab/dusk.yml
+  - https://ci.kool.dev/laravel/gitlab/phpunit.yml
+
+# build
+vendor:
+  extends: .vendor
+
+assets:
+  extends: .assets
+
+# QA
+eslint:
+  extends: .eslint
+
+php-cs-fixer:
+  extends: .cs-fixer
+
+phpmd:
+  extends: .phpmd
+
+security-check:
+  extends: .security-check
+
+phpmnd:
+  extends: .phpmnd
+
+phpcpd:
+  extends: .phpcpd
+
+phan:
+  extends: .phan
+
+dusk:
+  extends: .dusk
+
+phpunit:
+  extends: .phpunit</pre>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p>CI Kool.dev is manteined by <a href="https://kool.dev">Kool.dev</a> team and supported by <a href="https://fireworkweb.com">Firework Web</a> and all the community.</p>
+        </div>
+    </footer>
+</body>
+</html>
