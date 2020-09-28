@@ -1,0 +1,30 @@
+.assets:
+  image: kooldev/kool:1.0
+  services:
+    - docker:dind
+  tags:
+    - dind
+  stage: build
+  cache:
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - node_modules
+      - public/css
+      - public/fonts
+      - public/img
+      - public/js
+      - public/mix-manifest.json
+    expire_in: 1 week
+  cache:
+    paths:
+      - node_modules/
+      - .yarn/
+  before_script:
+    - mkdir -p .yarn
+    - kool run yarn install --no-progress --silent --force --cache-folder=.yarn/
+  script:
+    - kool run yarn production
+  dependencies: []
+  needs: []
