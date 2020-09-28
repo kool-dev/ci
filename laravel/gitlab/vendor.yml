@@ -1,0 +1,24 @@
+.vendor:
+  image: kooldev/kool:1.0
+  services:
+    - docker:dind
+  tags:
+    - dind
+  stage: build
+  cache:
+    paths:
+      - vendor/
+  before_script:
+    - cp .env.testing .env
+    - kool start
+  script:
+    - kool run composer install --prefer-dist --no-progress --no-suggest --no-interaction -v --optimize-autoloader
+  after_script:
+    - kool stop --purge
+  artifacts:
+    paths:
+      - vendor
+      - public/vendor
+    expire_in: 4 hour
+  dependencies: []
+  needs: []
