@@ -97,6 +97,38 @@ dusk:
 phpunit:
   extends: .phpunit</pre>
             </div>
+            <p>and on your <b>kool.yml</b> make sure to add on the default Laravel preset, the QA help tasks which you can run locally and will be used by the CI jobs above:</p>
+
+            <div style="margin: 1em 5em; padding: 1em;" class="bg-dark">
+                <pre class="text-light">
+  phpqa: kool docker jakzal/phpqa:1.17.0-php7.2-alpine
+  # helpful to sync up service dependencies
+  wait-services: kool exec app dockerize -wait tcp://database:3306 -wait tcp://cache:6379 -timeout 30s
+
+  # quality assurance tools
+  eslint: kool run yarn lint
+  phan: kool run phpqa phan --color -p -l app -iy 5
+  phpcpd: kool run phpqa phpcpd --fuzzy app
+  phpmd: kool run phpqa phpmd app text phpmd/codesize.xml,phpmd/controversial.xml,phpmd/design.xml,phpmd/naming.xml,unusedcode,phpmd/cleancode.xml
+  phpmnd: kool run phpqa phpmnd app --ignore-funcs=round,sleep,abort,strpad,number_format --exclude=tests --progress --extensions=default_parameter,-return,argument
+  php-security-checker: kool run phpqa security-checker security:check composer.lock
+  phpunit: kool exec app ./vendor/bin/phpunit
+  start:chrome: kool docker -- --name="chromedriver" --network=$KOOL_GLOBAL_NETWORK -d --shm-size=256M fireworkweb/chromedriver:latest
+  stop:chrome: docker stop chromedriver
+  dusk: kool run artisan dusk
+  php-cs-fixer-check:
+    - kool run phpqa php-cs-fixer fix --diff --dry-run app/
+    - kool run phpqa php-cs-fixer fix --diff --dry-run tests/
+    - kool run phpqa php-cs-fixer fix --diff --dry-run resources/lang
+    - kool run phpqa php-cs-fixer fix --diff --dry-run config
+    - kool run phpqa php-cs-fixer fix --diff --dry-run database
+  php-cs-fixer:
+    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose app/
+    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose tests/
+    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose resources/lang
+    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose config
+    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose database</pre>
+            </div>
         </div>
     </section>
 
