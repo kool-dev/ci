@@ -1,0 +1,10 @@
+.security-check:
+  image: kooldev/kool:1.0
+  services:
+    - docker:dind
+  tags:
+    - dind
+  stage: QA
+  script:
+    - kool run php-security-checker
+  needs: []

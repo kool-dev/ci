@@ -1,0 +1,30 @@
+.dusk:
+  image: kooldev/kool:1.0
+  services:
+    - docker:dind
+  tags:
+    - dind
+  stage: QA
+  before_script:
+    - cp .env.dusk.local .env
+    - kool start
+    - kool run start:chrome
+    - kool run wait-services
+    - kool run artisan migrate:fresh --seed
+  script:
+    - kool run dusk
+  after_script:
+    - kool logs > storage/logs/kool_logs
+    - kool stop
+    - kool run stop:chrome
+  artifacts:
+    paths:
+      - storage/logs
+    when: on_failure
+    expire_in: 1 week
+  dependencies:
+    - vendor
+    - assets
+  needs:
+    - vendor
+    - assets

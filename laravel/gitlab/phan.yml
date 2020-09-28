@@ -1,0 +1,15 @@
+.phan:
+  image: kooldev/kool:1.0
+  services:
+    - docker:dind
+  tags:
+    - dind
+  stage: QA
+  before_script:
+    - cp .env.testing .env
+  script:
+    - kool run phan
+  dependencies:
+   - vendor
+  needs:
+   - vendor
