@@ -1,0 +1,14 @@
+eslint:
+  image: kooldev/kool:1.0
+  services:
+    - docker:dind
+  tags:
+    - dind
+  stage: QA
+  dependencies: []
+  script:
+    - kool run eslint
+  dependencies:
+    - assets
+  needs:
+    - assets
