@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  app:
+    image: kooldev/nginx:static
+    command: ["nginx", "-g", "daemon off;"]
+    ports:
+     - "${KOOL_HTTP_PORT:-80}:80"
+    volumes:
+     - ./ci.nginx.conf:/etc/nginx/conf.d/default.conf
+     - .:/app/public:cached
+    networks:
+     - kool_global
+
+networks:
+  kool_global:
+    external: true
+    name: "${KOOL_GLOBAL_NETWORK:-kool_global}"
