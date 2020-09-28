@@ -1,4 +1,4 @@
-.phpmd:
+.phpcpd:
   image: kooldev/kool:1.0
   services:
     - docker:dind
