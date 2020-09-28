@@ -1,0 +1,15 @@
+# Here we can override service configurations made at kool.services.yml
+# for deployments only.
+services:
+  app:
+    # Appications requires a special image built for deployment
+    build: kool.deploy.dockerfile
+    # What port to map on deployment
+    port: 80
+    # Tells kool deploy that this service accessible through the deployment url (only one service can be set to public).
+    public: true
+
+    # Environment refers to a file to be used for deployment only and will make those variables
+    # available for the deployed application. There are also some special keys kool deploy will
+    # override in this file upon deployment, i.e the deployed database host.
+    environment: kool.deploy.env
