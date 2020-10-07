@@ -5,6 +5,7 @@
   tags:
     - dind
   stage: QA
+  interruptible: true
   before_script:
     - cp .env.testing .env
     - kool start

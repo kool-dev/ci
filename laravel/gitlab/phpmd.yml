@@ -5,6 +5,7 @@
   tags:
     - dind
   stage: QA
+  interruptible: true
   script:
     - kool run phpmd
   needs: []

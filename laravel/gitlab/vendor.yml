@@ -5,6 +5,7 @@
   tags:
     - dind
   stage: build
+  interruptible: true
   cache:
     paths:
       - vendor/
