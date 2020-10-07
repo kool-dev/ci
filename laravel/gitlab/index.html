@@ -22,6 +22,7 @@
                     <a href="https://kool.dev" target="_blank" class="btn btn-primary btn-sm my-2">Powered by Kool</a>
                 </p>
                 <p>
+                    <a href="variabless.yml" class="btn btn-secondary btn-sm my-2">variabless.yml</a>
                     <a href="assets.yml" class="btn btn-secondary btn-sm my-2">assets.yml</a>
                     <a href="cs-fixer.yml" class="btn btn-secondary btn-sm my-2">cs-fixer.yml</a>
                     <a href="dusk.yml" class="btn btn-secondary btn-sm my-2">dusk.yml</a>
@@ -50,6 +51,9 @@
             <div style="margin: 1em 5em; padding: 1em;" class="bg-dark">
                 <pre class="text-light">
 include:
+  # default variables
+  - https://ci.kool.dev/laravel/gitlab/variables.yml
+  # jobs
   - https://ci.kool.dev/laravel/gitlab/vendor.yml
   - https://ci.kool.dev/laravel/gitlab/assets.yml
   - https://ci.kool.dev/laravel/gitlab/eslint.yml
