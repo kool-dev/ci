@@ -16,13 +16,13 @@
     <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">Laravel continuous integration on Gitlab CI</h1>
-                <p class="lead text-muted">A few usual build and quality assurante routines, with static analysis and validation for the PHP code and Laravel best practices.</p>
+                <h1 class="jumbotron-heading">Laravel continuous integration on GitLab CI/CD</h1>
+                <p class="lead text-muted">A few common build and QA routines, including static analysis and validation of PHP code and Laravel best practices.</p>
                 <p>
                     <a href="https://kool.dev" target="_blank" class="btn btn-primary btn-sm my-2">Powered by Kool</a>
                 </p>
                 <p>
-                    <a href="variabless.yml" class="btn btn-secondary btn-sm my-2">variabless.yml</a>
+                    <a href="variables.yml" class="btn btn-secondary btn-sm my-2">variables.yml</a>
                     <a href="assets.yml" class="btn btn-secondary btn-sm my-2">assets.yml</a>
                     <a href="cs-fixer.yml" class="btn btn-secondary btn-sm my-2">cs-fixer.yml</a>
                     <a href="dusk.yml" class="btn btn-secondary btn-sm my-2">dusk.yml</a>
@@ -41,10 +41,10 @@
 
     <section>
         <div class="container" style="margin-bottom: 5em;">
-            <h3>Gitlab CI configuration for a Laravel application running with Kool.dev</h3>
+            <h3>GitLab CI/CD configuration for a Laravel application running with Kool.dev</h3>
 
-            <p>The example below can be used to run Gitlab CI jobs for your Laravel application.</p>
-            <p><b>Requirements:</b> all jobs have a <i>dind</i> tag which is meant to indicate a pre-configured Gitlab Runner on your repository that can Docker-in-Docker jobs.</p>
+            <p>The example below can be used to run GitLab CI/CD jobs for your Laravel application.</p>
+            <p><b>Requirements:</b> all jobs have a <i>dind</i> tag, which is meant to indicate a pre-configured GitLab Runner on your repository that can run Docker-in-Docker jobs.</p>
 
             <p><b>.gitlab-ci.yml</b></p>
 
@@ -101,7 +101,7 @@ dusk:
 phpunit:
   extends: .phpunit</pre>
             </div>
-            <p>and on your <b>kool.yml</b> make sure to add on the default Laravel preset, the QA help tasks which you can run locally and will be used by the CI jobs above:</p>
+            <p>And in your <b>kool.yml</b>, make sure to add the following QA help tasks to the default Laravel preset. You can run these tasks locally, and they'll be used by the CI jobs above:</p>
 
             <div style="margin: 1em 5em; padding: 1em;" class="bg-dark">
                 <pre class="text-light">
@@ -118,7 +118,7 @@ phpunit:
   php-security-checker: kool run phpqa security-checker security:check composer.lock
   phpunit: kool exec app ./vendor/bin/phpunit
   start:chrome: kool docker -- --name="chromedriver" --network=$KOOL_GLOBAL_NETWORK -d --shm-size=256M fireworkweb/chromedriver:latest
-  stop:chrome: docker stop chromedriver
+  stop:chrome: kool docker stop chromedriver
   dusk: kool run artisan dusk
   php-cs-fixer-check:
     - kool run phpqa php-cs-fixer fix --diff --dry-run app/
@@ -138,7 +138,7 @@ phpunit:
 
     <footer class="text-muted">
         <div class="container">
-            <p>CI Kool.dev is manteined by <a href="https://kool.dev">Kool.dev</a> team and supported by <a href="https://fireworkweb.com">Firework Web</a> and all the community.</p>
+          <p>CI Kool.dev is maintained by the <a href="https://kool.dev">Kool.dev</a> team, sponsored by <a href="https://fireworkweb.com">Firework Web</a>, and supported by the community.</p>
         </div>
     </footer>
 </body>
