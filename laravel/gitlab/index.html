@@ -118,7 +118,7 @@ phpunit:
   php-security-checker: kool run phpqa security-checker security:check composer.lock
   phpunit: kool exec app ./vendor/bin/phpunit
   start:chrome: kool docker -- --name="chromedriver" --network=$KOOL_GLOBAL_NETWORK -d --shm-size=256M fireworkweb/chromedriver:latest
-  stop:chrome: kool docker stop chromedriver
+  stop:chrome: docker stop chromedriver
   dusk: kool run artisan dusk
   php-cs-fixer-check:
     - kool run phpqa php-cs-fixer fix --diff --dry-run app/
