@@ -9,6 +9,7 @@ jobs:
 
     env:
       KOOL_DEPLOY_DOMAIN: ci.kool.dev
+      KOOL_API_TOKEN: ${{ secrets.KOOL_API_TOKEN }}
 
     steps:
     - name: Install Kool
