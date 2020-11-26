@@ -1,0 +1,17 @@
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      KOOL_DEPLOY_DOMAIN: ci.kool.dev
+
+    steps:
+      - uses: kool-dev/action@v1
+
+      - name: Kool Deploy
+        run: kool deploy
