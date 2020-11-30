@@ -25,6 +25,7 @@
                     <a href="variables.yml" class="btn btn-secondary btn-sm my-2">variables.yml</a>
                     <a href="assets.yml" class="btn btn-secondary btn-sm my-2">assets.yml</a>
                     <a href="cs-fixer.yml" class="btn btn-secondary btn-sm my-2">cs-fixer.yml</a>
+                    <a href="../.php_cs" class="btn btn-warning btn-sm my-2">.php_cs</a>
                     <a href="dusk.yml" class="btn btn-secondary btn-sm my-2">dusk.yml</a>
                     <a href="eslint.yml" class="btn btn-secondary btn-sm my-2">eslint.yml</a>
                     <a href="phan.yml" class="btn btn-secondary btn-sm my-2">phan.yml</a>
@@ -120,18 +121,9 @@ phpunit:
   start:chrome: kool docker -- --name="chromedriver" --network=$KOOL_GLOBAL_NETWORK -d --shm-size=256M fireworkweb/chromedriver:latest
   stop:chrome: docker stop chromedriver
   dusk: kool run artisan dusk
-  php-cs-fixer-check:
-    - kool run phpqa php-cs-fixer fix --diff --dry-run app/
-    - kool run phpqa php-cs-fixer fix --diff --dry-run tests/
-    - kool run phpqa php-cs-fixer fix --diff --dry-run resources/lang
-    - kool run phpqa php-cs-fixer fix --diff --dry-run config
-    - kool run phpqa php-cs-fixer fix --diff --dry-run database
-  php-cs-fixer:
-    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose app/
-    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose tests/
-    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose resources/lang
-    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose config
-    - kool run phpqa php-cs-fixer fix --diff --format=txt --verbose database</pre>
+  php-cs-fixer: kool run phpqa php-cs-fixer fix --diff --diff-format=udiff --verbose
+  php-cs-fixer-check: kool run php-cs-fixer --dry-run
+</pre>
             </div>
         </div>
     </section>
