@@ -10,7 +10,7 @@
     paths:
       - vendor/
   before_script:
-    - cp .env.testing .env
+    - if [ -f .env.testing ]; then cp .env.testing .env; fi
     - kool start
   script:
     - kool run composer install --prefer-dist --no-progress --no-suggest --no-interaction -v --optimize-autoloader
