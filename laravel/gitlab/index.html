@@ -106,7 +106,7 @@ phpunit:
 
             <div style="margin: 1em 5em; padding: 1em;" class="bg-dark">
                 <pre class="text-light">
-  phpqa: kool docker jakzal/phpqa:1.17.0-php7.2-alpine
+  phpqa: kool docker jakzal/phpqa:latest
   # helpful to sync up service dependencies
   wait-services: kool exec app dockerize -wait tcp://database:3306 -wait tcp://cache:6379 -timeout 30s
 
