@@ -143,8 +143,12 @@ phpunit:
 
             <div style="margin: 1em 5em; padding: 1em;" class="bg-dark">
                 <pre class="text-light">
+  # make sure to add phpqa since it will be used by all other commands
+  # the image used here is pinned to a known working version with the
+  # commands configured in this sample kool.yml
   phpqa: kool docker jakzal/phpqa:php7.4-alpine
-  # helpful to sync up service dependencies
+
+  # helpful to sync up service dependencies - used when we need to wait for services to startup
   wait-services: kool exec app dockerize -wait tcp://database:3306 -wait tcp://cache:6379 -timeout 30s
 
   # quality assurance tools
@@ -153,7 +157,7 @@ phpunit:
   phpcpd: kool run phpqa phpcpd --fuzzy app
   phpmd: kool run phpqa phpmd app text phpmd/codesize.xml,phpmd/controversial.xml,phpmd/design.xml,phpmd/naming.xml,unusedcode,phpmd/cleancode.xml
   phpmnd: kool run phpqa phpmnd app --ignore-funcs=round,sleep,abort,strpad,number_format --exclude=tests --progress --extensions=default_parameter,-return,argument
-  php-security-checker: kool run phpqa security-checker security:check composer.lock
+  php-security-checker: kool run phpqa local-php-security-checker
   phpunit: kool exec app ./vendor/bin/phpunit
   start:chrome: kool docker -- --name="chromedriver" --network=$KOOL_GLOBAL_NETWORK -d --shm-size=256M fireworkweb/chromedriver:latest
   stop:chrome: docker stop chromedriver
