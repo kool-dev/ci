@@ -3,7 +3,5 @@ variables:
   # GIT default behaviour
   GIT_STRATEGY: fetch
   GIT_DEPTH: "5"
-  # Tell kool that we are not in a TTY (soon to be deprecated on 1.4.x)
-  KOOL_TTY_DISABLE: "1"
   # Wordaround for DinD TLS requirement
   DOCKER_TLS_CERTDIR: ""
