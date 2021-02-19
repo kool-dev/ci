@@ -6,7 +6,7 @@ variables:
 .vendor:
   image: kooldev/kool:1.0
   services:
-    - docker:dind
+    - docker:19-dind
   tags:
     - dind
   stage: build
